@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard </title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard View on {{ date }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Shift Start Time</th>
+                <th>Shift End Time</th>
+                <th>On Leave</th>
+                <th>Allocated Tickets</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee_data in employees_data %}
+                <tr>
+                    <td>{{ employee_data.name }}</td>
+                    <td>{{ employee_data.start_time }}</td>
+                    <td>{{ employee_data.end_time }}</td>
+                    <td>{% if employee_data.on_leave %}YES{% else %}-{% endif %}</td>
+                    <td>
+                        <ul>
+                            {% for ticket in employee_data.allocated_tickets %}
+                                <li>{{ ticket.ticket_number }} - {{ ticket.description }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
