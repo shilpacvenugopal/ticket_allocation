@@ -63,36 +63,44 @@ Follow these steps to set up the Ticket Management System project on your local 
 
  8. **Task 1**
     Basic CURD Operations
-  - Method: (GET)
+  Method: (GET)
   - url:
     ```bash
      http://127.0.0.1:8000/tickets/ticket/
     ```
 
-  - Method: (POST)
+    Method: (POST)
   - Request Body : ticket_number, description, resolution_end_date
   - url:
     ```bash
      http://127.0.0.1:8000/tickets/ticket/
     ```
 
-  - Method: (PUT)
+    Method: (PUT)
   - Request Body : ticket_number, description, resolution_end_date
   - url:
     ```bash
      http://127.0.0.1:8000/tickets/ticket/<id>/
     ```
-  - Method: (DELETE)
+    Method: (DELETE)
   - url:
     ```bash
      http://127.0.0.1:8000/tickets/ticket/<id>/
     ```
+09. **Task 2**
+    Allocation of the ticket to the employee will take place using the url:
+    Method: (POST)
+  - Request Body : ticket_number, description, resolution_end_date
+  - url:
+    ```bash
+     http://127.0.0.1:8000/tickets/ticket/
+    ```
 
-9. **Access the Dashboard Interface:**
+11. **Access the Dashboard Interface:**
 
-   Visit [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) and log in with the admin credentials created in step 6.
-   Visit [http://127.0.0.1:8000/tickets/dashboard/](http://127.0.0.1:8000/tickets/dashboard/) and log in with the admin credentials created in step 6.
-
+ -  Visit [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) and log in with the admin credentials created in step 6.
+  - Visit [http://127.0.0.1:8000/tickets/dashboard/](http://127.0.0.1:8000/tickets/dashboard/)
+    
 ## Technology Stack
 
 - **Backend:** Python – Django
