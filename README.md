@@ -112,6 +112,8 @@ Follow these steps to set up the Ticket Management System project on your local 
 
     - Visit [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) and log in with the admin credentials created in step 7.
     - Visit [http://127.0.0.1:8000/tickets/dashboard/](http://127.0.0.1:8000/tickets/dashboard/)
+    - Visit [http://127.0.0.1:8000/tickets/dashboard/?date=<date>](http://127.0.0.1:8000/tickets/dashboard/?date=<date>) to get the dashboard view of a particular date.
+
 
 ## Technology Stack
 
@@ -119,4 +121,4 @@ Follow these steps to set up the Ticket Management System project on your local 
 - **Frontend:** Django Templates
 - **Database:** PostgreSQL
 
-Make sure to replace `<id>` in the URLs with the actual ticket ID when performing CRUD operations. Also, ensure to provide valid data in the request bodies where necessary.
+Make sure to replace `<id>` in the URLs with the actual ticket ID when performing CRUD operations. Make sure to replace `<date>` in the URLs with the date eg:2024-03-07 when performing url of the dashboard operations. Also, ensure to provide valid data in the request bodies where necessary.
