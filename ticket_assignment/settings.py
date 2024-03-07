@@ -87,9 +87,9 @@ WSGI_APPLICATION = 'ticket_assignment.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ticket',
+        'NAME': 'ticket',   ##change the db name
         'USER': 'postgres',
-        'PASSWORD': '123456',
+        'PASSWORD': '123456',  ##change the password
         'HOST': 'localhost',
         'PORT': '5432',
     }

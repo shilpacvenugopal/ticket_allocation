@@ -17,7 +17,7 @@ class TicketAPIView(APIView):
             self.allocate_ticket(ticket_obj)
             return Response({'id':ticket_obj.id,"message":"Successfully Created Ticket"},status=200)
         except:
-            return Response({'error': 'Something went wrong'}, status=400)
+            return Response({'error': 'Something went wrong and check db connection'}, status=400)
 
     def get(self,request):
         # Get ticket details
@@ -25,7 +25,7 @@ class TicketAPIView(APIView):
             ticket_obj=Ticket.objects.all().values()
             return Response({"ticket_obj":ticket_obj},status=200)
         except:
-            return Response({'error': 'Something went wrong'}, status=400)
+            return Response({'error': 'Something went wrong and check db connection'}, status=400)
 
     def put(self,request,id):
         try:
@@ -38,13 +38,13 @@ class TicketAPIView(APIView):
                  )
             return Response({'id':id,"message":"Successfully Updated Ticket"},status =200)
         except Ticket.DoesNotExist:
-            return Response({'error': 'Ticket object does not exist'}, status=400)
+            return Response({'error': 'Ticket object does not exist and check db connection'}, status=400)
     def delete(self, request, id):
         try:
             Ticket.objects.get(id=id).delete()
             return Response({"message":"Deleted ticket Successfully"}, status=200)
         except Ticket.DoesNotExist:
-            return Response({'error': 'Ticket object does not exist'}, status=400)
+            return Response({'error': 'Ticket object does not exist and check db connection'}, status=400)
 
     def allocate_ticket(self, ticket):
         current_date = ticket.creation_date.date()
@@ -76,7 +76,7 @@ class EmployeeAPIView(APIView):
                  )
             return Response({'id':employee_obj.id,"message":"Successfully Created Employee"},status=200)
         except:
-            return Response({'error': 'Something went wrong'}, status=400)
+            return Response({'error': 'Something went wrong and check db connection'}, status=400)
 
 class DutyRosterAPIView(APIView):
     def post(self,request):
@@ -91,7 +91,7 @@ class DutyRosterAPIView(APIView):
                  )
             return Response({'id':duty_roster_obj.id,"message":"Successfully Created DutyRoster"},status=200)
         except:
-            return Response({'error': 'Something went wrong'}, status=400)
+            return Response({'error': 'Something went wrong and check db connection'}, status=400)
 
 
 class DashboardAPIView(APIView):
