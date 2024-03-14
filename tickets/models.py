@@ -17,6 +17,7 @@ class Ticket(models.Model):
     ticket_number = models.CharField(max_length=100)
     creation_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
+    ticket_time = models.TimeField(null=True, blank=True)
     resolution_end_date = models.DateField(null=True, blank=True)
     assigned_employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True)
 

@@ -11,7 +11,8 @@ class TicketAPIView(APIView):
             ticket_obj=Ticket.objects.create(
                 ticket_number=request.data['ticket_number'],
                 description =request.data.get('description'),
-                resolution_end_date =request.data['resolution_end_date']
+                resolution_end_date =request.data['resolution_end_date'],
+                ticket_time = request.data['ticket_time']
                  )
             # function for automatically allocate the ticket
             self.allocate_ticket(ticket_obj)
@@ -34,8 +35,10 @@ class TicketAPIView(APIView):
             Ticket.objects.filter(id=id).update(
                 ticket_number=request.data.get('ticket_number'),
                 description =request.data.get('description'),
-                resolution_end_date =request.data.get('resolution_end_date')
-                 )
+                resolution_end_date =request.data.get('resolution_end_date'),
+                ticket_time=request.data['ticket_time']
+
+            )
             return Response({'id':id,"message":"Successfully Updated Ticket"},status =200)
         except Ticket.DoesNotExist:
             return Response({'error': 'Ticket object does not exist and check db connection'}, status=400)
@@ -47,6 +50,7 @@ class TicketAPIView(APIView):
             return Response({'error': 'Ticket object does not exist and check db connection'}, status=400)
 
     def allocate_ticket(self, ticket):
+        print("allocate")
         current_date = ticket.creation_date.date()
         # based on duty roster get the available employees and order by shift time
         available_employees = DutyRoster.objects.filter(date=current_date, is_available=True,is_leave=False).order_by(
@@ -55,6 +59,11 @@ class TicketAPIView(APIView):
 
             #check if the employee have ticket already
             if not Ticket.objects.filter(creation_date=current_date, assigned_employee=employee.employee).exists():
+                left_time=employee.shift_start.hour - employee.shift_end.hour
+                print(left_time)
+                print(ticket.ticket_time.date())
+                print(ticket.ticket_time.hour)
+                print("assigning a ticket")
                 ticket.assigned_employee = employee.employee
                 ticket.save()
                 employee.is_available = False
@@ -75,6 +84,13 @@ class EmployeeAPIView(APIView):
                 employee_number =request.data['employee_number']
                  )
             return Response({'id':employee_obj.id,"message":"Successfully Created Employee"},status=200)
+        except:
+            return Response({'error': 'Something went wrong and check db connection'}, status=400)
+
+    def get(self,request):
+        try:
+            employee_obj = Employee.objects.all().values()
+            return Response({"employee_obj": employee_obj}, status=200)
         except:
             return Response({'error': 'Something went wrong and check db connection'}, status=400)
 
